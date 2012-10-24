@@ -1,7 +1,7 @@
 <?php
 
-Route::get('/', 				array('uses' => 'home@index'));
-Route::get('index', 			array('uses' => 'home@index'));
+Route::any('/', 				array('uses' => 'home@index'));
+Route::any('index', 			array('uses' => 'home@index'));
 Route::get('edizioni',  		array('uses' => 'home@editions'));
 Route::get('edizioni/(:any)',   array('uses' => 'home@editions'));
 Route::get('serie',				array('uses' => 'home@series'));
@@ -22,7 +22,10 @@ Route::get('admin/dashboard', array('before' => 'auth', 'uses' => 'admin@index')
 
 // Login/Logout
 Route::any('login', array('uses' => 'admin@login'));
-Route::get('logout', function() { Auth::logout(); return Redirect::to('login'); });
+Route::get('logout', function() {
+	if (! Auth::guest()) Auth::logout();
+	return Redirect::to('login');
+});
 
 /* Events */
 

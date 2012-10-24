@@ -7,11 +7,16 @@ class Comment extends Eloquent
 	public static $rules = array(
 		'name' 	  => 'required',
 		'comment' => 'required',
+		'captcha' => 'coolcaptcha|required'
 	);
 
-	public function validate()
-	{
+	public static $messages = array(
+    	'coolcaptcha' => 'Captcha Errato',
+    );
 
+	public static function validate( $data )
+	{
+		return Validator::make($data, self::$rules, self::$messages);
 	}
 
 	public function edition()
@@ -26,6 +31,11 @@ class Comment extends Eloquent
 	 */
 	public static function get_comments($id)
 	{
-		return static::where('edition_id', '=', $id)->get();
+		return static::where('edition_id', '=', $id)->order_by('id', 'desc')->get();
+	}
+
+	public static function insert_comment($edition_id, $name, $comment)
+	{
+		self::create(array('edition_id' => $edition_id, 'name' => $name, 'comment' => $comment, 'chapter_id' => 0, 'series_id' => 0));
 	}
 }

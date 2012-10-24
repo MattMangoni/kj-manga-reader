@@ -76,6 +76,26 @@
           @endforeach
         </div>
 
+        <div id="comment-form">
+          <h3>Inserisci un commento</h3>
+          <br />
+
+          {{ Form::open() }}
+
+          {{ Form::token() }}
+          {{ Form::label('name', 'Nome utente') }}
+          {{ Form::text('name', '', array('class' => 'span4', 'placeholder' => 'Inserisci il tuo nome...')) }}
+          {{ Form::label('comment', 'Commento') }}
+          {{ Form::textarea('comment', '', array('class' => 'span8')) }}
+          {{ Form::text('captcha', '', array('class' => 'captchainput', 'placeholder' => 'Inserisci il captcha...')) }}
+          {{ Form::image(CoolCaptcha\Captcha::img(), 'captcha', array('class' => 'captchaimg')) }}<br /><br />
+
+          {{ Form::submit('Inserisci il commento', array('class' => 'btn btn-primary btn-large')) }}
+
+          {{ Form::close() }}
+
+        </div>
+
         <div class="alert alert-important">Per vedere i dettagli di tutte le edizioni del Komixjam Manga Project,
           <a href="{{ URL::home() }}edizioni">clicca qui</a></div>
       </div>
