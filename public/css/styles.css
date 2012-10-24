@@ -1,0 +1,24 @@
+/* FONT-FACE */
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('../fonts/BebasNeue-webfont.eot');
+    src: url('../fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/BebasNeue-webfont.woff') format('woff'),
+         url('../fonts/BebasNeue-webfont.ttf') format('truetype'),
+         url('../fonts/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* Styles ovverride */
+
+.navbar .brand {
+	text-transform: uppercase;
+	font-family: 'BebasNeueRegular', Helvetica, Arial, sans-serif;
+	font-size: 22px;
+	padding-bottom: 0;
+	padding-top: 13px;
+	padding-right: 20px;
+}
