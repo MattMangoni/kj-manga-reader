@@ -56,8 +56,16 @@
         <br />
         <h3>Ultimi commenti di quest'edizione</h3>
         <br />
-        <div id="comments-container">
 
+       @if($errors->has())
+        <div class="alert alert-error">
+          {{ $errors->first('nome',     ':message<br />') }}
+          {{ $errors->first('commento', ':message<br />') }}
+          {{ $errors->first('captcha') }}
+        </div>
+       @endif
+
+        <div id="comments-container">
           @foreach($last_edition->comments as $comment)
 
             <?php
@@ -83,10 +91,10 @@
           {{ Form::open() }}
 
           {{ Form::token() }}
-          {{ Form::label('name', 'Nome utente') }}
-          {{ Form::text('name', '', array('class' => 'span4', 'placeholder' => 'Inserisci il tuo nome...')) }}
-          {{ Form::label('comment', 'Commento') }}
-          {{ Form::textarea('comment', '', array('class' => 'span8')) }}
+          {{ Form::label('nome', 'Nome utente') }}
+          {{ Form::text('nome', '', array('class' => 'span4', 'placeholder' => 'Inserisci il tuo nome...')) }}
+          {{ Form::label('commento', 'Commento') }}
+          {{ Form::textarea('commento', '', array('class' => 'span8')) }}
           {{ Form::text('captcha', '', array('class' => 'captchainput', 'placeholder' => 'Inserisci il captcha...')) }}
           {{ Form::image(CoolCaptcha\Captcha::img(), 'captcha', array('class' => 'captchaimg')) }}<br /><br />
 

@@ -5,13 +5,14 @@ class Comment extends Eloquent
 	public static $timestamp = true; // set the updated_at field to update automatically
 
 	public static $rules = array(
-		'name' 	  => 'required',
-		'comment' => 'required',
-		'captcha' => 'coolcaptcha|required'
+		'nome' 	   => 'required',
+		'commento' => 'required',
+		'captcha'  => 'coolcaptcha|required'
 	);
 
 	public static $messages = array(
-    	'coolcaptcha' => 'Captcha Errato',
+		'required' => 'Il campo <strong>:attribute</strong> è obbligatorio.',
+    	'coolcaptcha' => 'Captcha errato',
     );
 
 	public static function validate( $data )

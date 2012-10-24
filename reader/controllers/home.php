@@ -39,7 +39,7 @@ class Home_Controller extends Base_Controller {
 
         if ($validate->valid())
         {
-            Comment::insert_comment(self::$last_edition_id, Input::get('name'), Input::get('comment'));
+            Comment::insert_comment(self::$last_edition_id, Input::get('nome'), Input::get('commento'));
         }
         else
         {
