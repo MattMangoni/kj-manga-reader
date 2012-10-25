@@ -46,8 +46,6 @@ class Init {
 		{
 			$table->increments('id');
 			$table->integer('edition_id');
-			$table->integer('series_id');
-			$table->integer('chapter_id');
 			$table->string('name');
 			$table->text('comment');
 			$table->timestamps();
@@ -56,7 +54,7 @@ class Init {
 
 		DB::table('users')->insert(array(
 			'username' => 'admin',
-			'password' => Hash::make('zxcvbn87')
+			'password' => Hash::make('secret'),
 		));
 
 		DB::table('editions')->insert(array(
@@ -109,8 +107,6 @@ class Init {
 
 		DB::table('comments')->insert(array(
 			'edition_id' => 2,
-			'series_id'  => 1,
-			'chapter_id' => 2,
 			'name'		 => 'Giggi',
 			'comment'	 => 'Ottimo capitolo!',
 			'created_at' => date('Y-m-d H:m'),
@@ -119,8 +115,6 @@ class Init {
 
 		DB::table('comments')->insert(array(
 			'edition_id' => 2,
-			'series_id'  => 1,
-			'chapter_id' => 2,
 			'name'		 => 'Francesco',
 			'comment'	 => 'Non mi è piaciuto molto...',
 			'created_at' => date('Y-m-d H:m'),
@@ -129,8 +123,6 @@ class Init {
 
 		DB::table('comments')->insert(array(
 			'edition_id' => 2,
-			'series_id'  => 1,
-			'chapter_id' => 2,
 			'name'		 => 'Giggi',
 			'comment'	 => 'Ottimo capitolo!',
 			'created_at' => date('Y-m-d H:m'),

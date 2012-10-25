@@ -80,7 +80,10 @@
                   <p>
                     Pubblicato da <strong>{{ $comment->name }}</strong>
                     il <strong>{{ $date }}</strong> alle <strong>{{ $time }}</strong>
-                    @if(! Auth::guest()) :: <a href="#">Edit</a> | <a href="#">Elimina</a>@endif
+                    @if(! Auth::guest())
+                      :: <a href="{{ URL::home() }}admin/comments/edit/{{ $comment->id }}">Modifica</a> |
+                      <a href="{{ URL::home() }}admin/comments/delete/{{ $comment->id }}">Elimina</a>
+                    @endif
                   </p>
                   <p>{{ $comment->comment }}</p><br />
                 </div>
@@ -105,7 +108,7 @@
           {{ Form::text('captcha', '', array('class' => 'captchainput', 'placeholder' => 'Inserisci il captcha...')) }}
           {{ Form::image(CoolCaptcha\Captcha::img(), 'captcha', array('class' => 'captchaimg')) }}<br /><br />
 
-          {{ Form::submit('Inserisci il commento', array('class' => 'btn btn-primary btn-large')) }}
+          {{ Form::submit('Inserisci il commento', array('class' => 'btn btn-success btn-large')) }}
 
           {{ Form::close() }}
 

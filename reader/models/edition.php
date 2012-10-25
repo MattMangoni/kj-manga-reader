@@ -41,7 +41,7 @@ class Edition extends Eloquent
 	 */
 	public static function get_editions()
 	{
-		return self::order_by('id', 'desc')->get();
+		return self::with('chapters')->order_by('id', 'desc')->get();
 	}
 
 	/**

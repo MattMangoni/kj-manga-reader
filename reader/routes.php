@@ -17,8 +17,14 @@ Route::get('read/(:any)/(:any)', 		array('uses' => 'reader@index'));
 Route::get('read/(:any)/(:any)/(:any)', array('uses' => 'reader@index'));
 
 // Admin
+Route::filter('pattern: admin/*', 'auth');
+
 Route::get('admin', 		  array('before' => 'auth', 'uses' => 'admin@index'));
 Route::get('admin/dashboard', array('before' => 'auth', 'uses' => 'admin@index'));
+Route::controller('admin.series');
+Route::controller('admin.chapters');
+Route::controller('admin.editions');
+Route::controller('admin.comments');
 
 // Login/Logout
 Route::any('login', array('uses' => 'admin@login'));

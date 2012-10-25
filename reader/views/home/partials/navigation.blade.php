@@ -8,6 +8,16 @@
           </a>
           <a class="brand" href="{{ URL::home() }}">Komixjam Manga Project</a>
           <ul class="nav pull-right">
+            @if(! Auth::guest())
+              <li>{{ HTML::link('admin/', 'Pannello di Amministrazione') }}</li>
+            @endif
+            <li>
+              @if(Auth::guest())
+                {{ HTML::link('login', 'Sei dello staff? Effettua il login!') }}
+              @else
+                {{ HTML::link('logout', 'Effettua il logout') }}
+              @endif
+            </li>
             <li><a href="http://www.komixjam.it" target="_blank">&larr; Visita Komixjam.it</a></li>
           </ul>
           <div class="nav-collapse">

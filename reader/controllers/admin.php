@@ -15,7 +15,7 @@ class Admin_Controller extends Base_Controller {
     	$series_num	  			= Series::count();
     	$chapter_num  			= Chapter::count();
 
-    	return View::make('admin.index')
+    	return View::make('admin.main.main')
     		->with('edition', 	  				$last_edition)
     		->with('last_edition_chapters_num', $last_edition_chapters)
     		->with('series_num',  				$series_num)
@@ -27,7 +27,7 @@ class Admin_Controller extends Base_Controller {
         if (Auth::guest())
             return View::make('admin.login');
         else
-            return Redirect::to('admin');
+            return Redirect::back();
     }
 
     public function post_login()
@@ -43,10 +43,9 @@ class Admin_Controller extends Base_Controller {
         );
 
         if (Auth::attempt($credentials)) {
-            return Redirect::to('admin')
-                ->with('data', $credentials);
+            return Redirect::to('admin')->with('data', $credentials);
         } else {
-            return Redirect::to('login');
+            return Redirect::to('login')->with('status', '<div class="alert alert-error">Le credenziali inserite non sono valide!</div>');
         }
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Online Manga Reader</title>
+    <title>Komixjam Manga Project - Pannello di Amministrazione</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -41,10 +41,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Manga Reader</a>
+          <a class="brand" href="{{ URL::home() }}">Komixjam Manga Reader</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li><a href="#">Home</a></li>
+              <li><a href="{{ URL::home() }}admin/">Dashboard</a></li>
               <li class="dropdown" id="edizioni">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#edizioni">
                   Edizioni
@@ -83,9 +83,13 @@
     </div>
 
     <div class="container">
-
-      <h1>Manga Reader Admin Panel</h1>
-      <br />
+      <div class="row">
+          <div class="span12">
+            <div class="page-header">
+                <h1>Pannello di amministrazione</h1>
+              </div>
+          </div>
+      </div>
 
       <div class="row">
 
@@ -94,63 +98,19 @@
           <div class="well" style="padding: 8px 0;">
 
             <ul class="nav nav-list">
-              <li class="active">
-                <a href="#">
-                  <i class="icon-white icon-home"></i>
-                  Home Pannello
-                </a>
-              </li>
-              <li class="nav-header">
-                Edizioni
-              </li>
+              <li><a href="{{ URL::home() }}admin/"> <i class="icon-home"></i> Home Pannello</a></li>
 
-              <li>
-                <a href="#">
-                  <i class="icon-book"></i>
-                  Aggiungi Edizione
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-book"></i>
-                  Gestisci Edizioni
-                </a>
-              </li>
+              <li class="nav-header">Edizioni</li>
+              <li>{{ HTML::link('admin/editions', 'Elenco Edizioni') }}</li>
+              <li>{{ HTML::link('admin/editions/new', 'Aggiungi Edizione') }}</li>
 
-              <li class="nav-header">
-                Serie
-              </li>
+              <li class="nav-header">Serie</li>
+              <li>{{ HTML::link('admin/series', 'Elenco Serie') }}</li>
+              <li>{{ HTML::link('admin/series/new', 'Aggiungi Serie') }}</li>
 
-              <li>
-                <a href="#">
-                  <i class="icon-book"></i>
-                  Aggiungi Serie
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-book"></i>
-                  Gestione Serie
-                </a>
-              </li>
-
-              <li class="nav-header">
-                Capitoli
-              </li>
-
-              <li>
-                <a href="#">
-                  <i class="icon-book"></i>
-                  Aggiungi Capitolo
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-book"></i>
-                  Gestione Capitoli
-                </a>
-              </li>
-
+              <li class="nav-header">Capitoli</li>
+              <li>{{ HTML::link('admin/chapters', 'Elenco Capitoli') }}</li>
+              <li>{{ HTML::link('admin/chapters/new', 'Aggiungi Capitoli') }}</li>
             </ul>
 
           </div>
@@ -159,22 +119,7 @@
 
         <div class="span9">
 
-          <div class="hero-unit">
-            <h1>Statistiche</h1>
-            <br />
-            <p>
-              Ultima edizione: {{ $edition->name }} ({{ $edition->status }})<br />
-              Serie totali: {{ $series_num }}<br />
-              Capitoli ultima edizione: {{ $last_edition_chapters_num }}<br />
-              Capitoli totali caricati: {{ $chapter_num }}
-            </p>
-            <br />
-            <p>
-              <a class="btn btn-primary btn-large">Gestione Edizioni</a>
-              <a class="btn btn-info btn-large">Gestione Serie</a>
-              <a class="btn btn-success btn-large">Gestione Capitoli</a>
-            </p>
-          </div>
+          @yield('content')
 
         </div>
 
@@ -184,7 +129,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="span12 well" style="text-align: center;">
+        <div class="span12 nav-header" style="text-align: center;">
           <p>Copyright &copy; 2012 Komixjam.it</p>
         </div>
       </div>

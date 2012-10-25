@@ -19,6 +19,8 @@
 				</div>
 			@endif
 
+			{{ Session::get('status') }}
+
 			{{ Form::open() }}
 
 			{{ Form::token() }}
