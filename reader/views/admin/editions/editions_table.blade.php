@@ -17,12 +17,15 @@
               <td>{{ $edition->status }}</td>
               <td>{{ HTML::link('admin/editions/edit/'.$edition->id, 'Modifica', array('class' => 'btn')) }}</td>
               <td>{{ HTML::link('admin/editions/delete/'.$edition->id, 'Elimina', array('class' => 'btn btn-danger')) }}</td>
+              @if($edition->status != 'Chiuso')
+                <td>{{ HTML::link('admin/editions/close/'.$edition->id, 'Chiudi',  array('class' => 'btn btn-inverse')) }}</td>
+              @else
+                <td>{{ HTML::link('#'.$edition->id, 'Chiudi',  array('class' => 'btn btn-inverse disabled')) }}</td>
+              @endif
             </tr>
             @endforeach
           </tbody>
         </table>
 
 		{{ HTML::link('admin/editions/new', 'Aggiungi una nuova edizione', array('class' => 'btn btn-success')) }}<br /><br />
-
-        <div class="alert alert-important">Nota bene: modifica l'edizione per chiuderla (ricordati di inserire il vincitore!)</div>
 @endsection

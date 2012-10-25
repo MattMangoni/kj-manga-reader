@@ -22,9 +22,10 @@ class Admin_Comments_Controller extends Base_Controller {
 
 		if ($validate->valid())
 		{
-			$comment          = Comment::find($id);
-			$comment->name    = Input::get('nome');
-			$comment->comment = Input::get('commento');
+			$comment          	 = Comment::find($id);
+			$comment->name    	 = Input::get('nome');
+			$comment->comment 	 = Input::get('commento');
+			$comment->updated_at = date('Y-m-d H:i');
 			$comment->save();
 
 			return Redirect::to('admin/comments/edit/'.$id)

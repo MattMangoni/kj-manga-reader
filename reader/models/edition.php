@@ -2,6 +2,16 @@
 
 class Edition extends Eloquent
 {
+	// validation rules
+	public static $rules = array(
+		'nome' => 'required',
+	);
+
+	// validation error messages
+	public static $messages = array(
+		'nome_required' => 'Il campo <strong>nome edizione</strong> è obbligatorio.',
+	);
+
 	public function series()
 	{
 		return $this->has_many('Series');
@@ -15,6 +25,35 @@ class Edition extends Eloquent
 	public function chapters()
 	{
 		return $this->has_many('Chapter');
+	}
+
+	/**
+	 * Validating the user input
+	 * @param validation $data
+	 * @return type
+	 */
+	public static function validate_edition( $data )
+	{
+		return Validator::make($data, self::$rules, self::$messages);
+	}
+
+	/**
+	 * Get single edition informations
+	 * @param integer $id
+	 * @return object
+	 */
+	public static function get_edition( $id )
+	{
+		return self::where('id', '=', $id)->first();
+	}
+
+	/**
+	 * Get data from all editions
+	 * @return array of objects
+	 */
+	public static function get_editions()
+	{
+		return self::with('chapters')->order_by('id', 'desc')->get();
 	}
 
 	/**
@@ -33,15 +72,6 @@ class Edition extends Eloquent
 	public static function get_last_edition_id()
 	{
 		return self::order_by('id', 'desc')->first('editions.id')->id;
-	}
-
-	/**
-	 * Get data from all editions
-	 * @return array of objects
-	 */
-	public static function get_editions()
-	{
-		return self::with('chapters')->order_by('id', 'desc')->get();
 	}
 
 	/**
@@ -72,5 +102,10 @@ class Edition extends Eloquent
 	public static function get_winners($num)
 	{
 		return self::get_closed_editions_prep()->take($num)->get();
+	}
+
+	public static function insert_edition($name)
+	{
+		return self::create(array('name' => $name, 'status' => 'Aperto', 'winner_series_id' => '', 'winner_chapter_id' => ''));
 	}
 }

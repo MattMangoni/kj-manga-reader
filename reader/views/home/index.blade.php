@@ -70,7 +70,7 @@
         <div id="comments-container">
 
             <div id="comments">
-
+            @if($comments->results != null)
               @foreach($comments->results as $comment)
                 <div id="comment">
                   <?php
@@ -88,7 +88,9 @@
                   <p>{{ $comment->comment }}</p><br />
                 </div>
               @endforeach
-
+            @else
+              <p>Nessun commento presente</p>
+            @endif
             </div>
 
            {{ $comments->links() }}
