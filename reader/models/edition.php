@@ -9,7 +9,7 @@ class Edition extends Eloquent
 
 	public function comments()
 	{
-		return $this->has_many('Comment');
+		return $this->has_many('Comment')->order_by('id', 'desc');
 	}
 
 	public function chapters()
@@ -23,7 +23,7 @@ class Edition extends Eloquent
 	 */
 	public static function get_last_edition()
 	{
-		return self::with('comments')->order_by('id', 'desc')->first();
+		return self::order_by('id', 'desc')->first();
 	}
 
 	/**

@@ -18,12 +18,14 @@ class Home_Controller extends Base_Controller {
     {
         $active_page      = 'index';
         $last_edition     = Edition::get_last_edition(); // get last edition data
+        $comments         = Comment::get_comments(self::$last_edition_id);
         $chapter_list     = Chapter::get_chapters('edition', self::$last_edition_id); // get edition's chapters list
         $get_last_winners = Edition::get_winners(3); // get last 3 edition's winners
 
         return View::make('home.index')
             ->with('active',       $active_page)
             ->with('last_edition', $last_edition)
+            ->with('comments',     $comments)
             ->with('chapters',     $chapter_list)
             ->with('winners',      $get_last_winners);
     }
@@ -46,7 +48,8 @@ class Home_Controller extends Base_Controller {
             return Redirect::to('/')->with_errors($validate);
         }
 
-        return Redirect::to('/');
+        return Redirect::to('/')
+            ->with('status', '<div class="alert alert-success">Commento aggiunto correttamente!</div>');
     }
 
     /**

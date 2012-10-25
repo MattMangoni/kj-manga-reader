@@ -32,7 +32,7 @@ class Comment extends Eloquent
 	 */
 	public static function get_comments($id)
 	{
-		return static::where('edition_id', '=', $id)->order_by('id', 'desc')->get();
+		return static::where('edition_id', '=', $id)->order_by('id', 'desc')->paginate(5);
 	}
 
 	public static function insert_comment($edition_id, $name, $comment)

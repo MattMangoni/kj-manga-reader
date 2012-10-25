@@ -57,6 +57,8 @@
         <h3>Ultimi commenti di quest'edizione</h3>
         <br />
 
+        {{ Session::get('status') }}
+
        @if($errors->has())
         <div class="alert alert-error">
           {{ $errors->first('nome',     ':message<br />') }}
@@ -66,22 +68,27 @@
        @endif
 
         <div id="comments-container">
-          @foreach($last_edition->comments as $comment)
-
-            <?php
-              $date = date('d/m/Y', strtotime($comment->created_at));
-              $time = date('H:m', strtotime($comment->created_at));
-            ?>
 
             <div id="comments">
-              <p>
-                Pubblicato da <strong>{{ $comment->name }}</strong>
-                il <strong>{{ $date }}</strong> alle <strong>{{ $time }}</strong>
-              </p>
 
-              <p>{{ $comment->comment }}</p><br />
+              @foreach($comments->results as $comment)
+                <div id="comment">
+                  <?php
+                    $date = date('d/m/Y', strtotime($comment->created_at));
+                    $time = date('H:i', strtotime($comment->created_at));
+                  ?>
+                  <p>
+                    Pubblicato da <strong>{{ $comment->name }}</strong>
+                    il <strong>{{ $date }}</strong> alle <strong>{{ $time }}</strong>
+                    @if(! Auth::guest()) :: <a href="#">Edit</a> | <a href="#">Elimina</a>@endif
+                  </p>
+                  <p>{{ $comment->comment }}</p><br />
+                </div>
+              @endforeach
+
             </div>
-          @endforeach
+
+           {{ $comments->links() }}
         </div>
 
         <div id="comment-form">
