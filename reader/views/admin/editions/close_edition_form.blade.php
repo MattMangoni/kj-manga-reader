@@ -14,7 +14,7 @@
 	{{ Form::token() }}
 
 	{{ Form::label('vincitore', 'Vincitore Edizione') }}
-	{{ Form::select('vincitore', array(0 => 'Scegli il vincitore', 1 => "Up! Capitolo 2")) }}<br /><br />
+	{{ Form::select('vincitore', $chapters) }}<br /><br />
 
 	{{ Form::submit("Procedi", array('class' => 'btn btn-inverse btn-large')) }}
 

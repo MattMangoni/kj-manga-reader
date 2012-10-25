@@ -32,6 +32,16 @@ class Chapter extends Eloquent
 	}
 
 	/**
+	 * Get all the chapter for a given edition
+	 * @param int $id
+	 * @return array of objects
+	 */
+	public static function get_chapters_from_edition($id)
+	{
+		return self::with('series')->where('edition_id', '=', $id)->get();
+	}
+
+	/**
 	 * Get chapter's and related edition's data
 	 * @param integer $id
 	 * @return object
@@ -44,6 +54,11 @@ class Chapter extends Eloquent
 		{
 			return $query;
 		}
+	}
+
+	public static function get_series_id_from_chapter($id)
+	{
+		return self::where('id', '=', $id)->first()->series_id;
 	}
 
 	/**

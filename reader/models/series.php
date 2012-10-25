@@ -40,4 +40,14 @@ class Series extends Eloquent
 			return $query;
 		}
 	}
+
+	/**
+	 * Get the series data from ID
+	 * @param int $id
+	 * @return object
+	 */
+	public static function get_series_from_id($id)
+	{
+		return self::where('id', '=', $id)->first()->id;
+	}
 }

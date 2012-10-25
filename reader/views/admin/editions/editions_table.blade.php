@@ -20,7 +20,7 @@
               @if($edition->status != 'Chiuso')
                 <td>{{ HTML::link('admin/editions/close/'.$edition->id, 'Chiudi',  array('class' => 'btn btn-inverse')) }}</td>
               @else
-                <td>{{ HTML::link('#'.$edition->id, 'Chiudi',  array('class' => 'btn btn-inverse disabled')) }}</td>
+                <td>{{ HTML::link('admin/editions/open/'.$edition->id, 'Riapri',  array('class' => 'btn btn-info')) }}</td>
               @endif
             </tr>
             @endforeach
