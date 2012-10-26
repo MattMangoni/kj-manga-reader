@@ -49,4 +49,27 @@ class Reader {
 	    // done!
 	    return $results;
 	}
+
+	public static function create_chapter_dir($directory)
+	{
+		if ( mkdir( path('public').'uploads'.DIRECTORY_SEPARATOR.$directory ) )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public static function unzip($zip_path, $unzip_path)
+	{
+	    $zip = new ZipArchive;
+	    $res = $zip->open($zip_path);
+
+	    if ($res === TRUE) {
+	         $zip->extractTo($unzip_path);
+	         $zip->close();
+	    }
+ 	}
 }

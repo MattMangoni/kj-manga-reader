@@ -1,6 +1,11 @@
 @layout('layouts.admin')
 
 @section('content')
+
+        <h2>Elenco Edizioni</h2>
+
+        {{ Session::get('status') }}
+
         <table class="table table-striped">
           <thead>
             <th>ID</th>
@@ -9,8 +14,8 @@
             <th>Status</th>
           </thead>
           <tbody>
-            <tr>
             @foreach($editions as $edition)
+            <tr>
               <td>{{ $edition->id }}</td>
               <td>{{ $edition->name }}</td>
               <td>{{ $edition->chapters()->count() }}</td>

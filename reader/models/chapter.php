@@ -2,6 +2,26 @@
 
 class Chapter extends Eloquent
 {
+
+	public static $rules = array(
+		'serie'    => 'not_in:0',
+		'edizione' => 'not_in:0',
+		'titolo'   => 'required',
+		'numero'   => 'required|integer',
+		'file' 	   => 'required|max:15000',
+	);
+
+	public static $messages = array(
+		'serie_not_in' 	  => 'Scegli <strong>una serie</strong>!',
+		'edizione_not_in' => "Scegli <strong>un'edizione</strong>!",
+		'titolo_required' => 'Il <strong>titolo</strong> è obbligatorio',
+		'numero_required' => 'Il <strong>numero del capitolo</strong> è obbligatorio',
+		'numero_integer'  => 'Il <strong>numero del capitolo</strong> deve essere un numero',
+		'file_required'	  => 'Devi caricare <strong>il file del capitolo</strong>!',
+		'file_mimes'	  => 'Il <strong>file</strong> deve essere uno <strong>zip</strong>',
+		'file_max'		  => 'Il <strong>file</strong> deve essere <strong>più piccolo di 10mb</strong>!',
+	);
+
 	public function edition()
 	{
 		return $this->belongs_to('Edition');
@@ -10,6 +30,21 @@ class Chapter extends Eloquent
 	public function series()
 	{
 		return $this->belongs_to('Series');
+	}
+
+	public static function validate_chapter( $data )
+	{
+		return Validator::make($data, self::$rules, self::$messages);
+	}
+
+	/**
+	 * Get the last {$num} chapters with series and edition info [for pagination]
+	 * @param int $num
+	 * @return array of objects
+	 */
+	public static function get_chapters_with_series_and_edition($num)
+	{
+		return self::with( array('series', 'edition') )->order_by('id', 'desc')->paginate($num);
 	}
 
 	/**
@@ -79,5 +114,10 @@ class Chapter extends Eloquent
 	public static function get_last_edition_chapters_num($id)
 	{
 		return self::where('edition_id', '=', $id)->count();
+	}
+
+	public static function insert_chapter($edition_id, $series_id, $chapter_num, $title)
+	{
+		return self::create( array( 'edition_id' => $edition_id, 'series_id' => $series_id, 'chapter_num' => $chapter_num, 'title' => $title ) );
 	}
 }

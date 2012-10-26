@@ -69,7 +69,7 @@ class Admin_Editions_Controller extends Base_Controller {
         if (Input::get('vincitore') != 0)
         {
         	$series_id = Chapter::get_series_id_from_chapter(Input::get('vincitore'));
-        	$winner_series_id = Series::get_series_from_id($series_id);
+        	$winner_series_id = Series::get_series_from_id($series_id)->id;
 
         	$edition = Edition::find($id);
         	$edition->winner_chapter_id = Input::get('vincitore');
@@ -144,6 +144,7 @@ class Admin_Editions_Controller extends Base_Controller {
     public function action_delete( $id )
     {
     	Edition::find($id)->delete();
+        return Redirect::back()->with('status', '<div class="alert alert-success">Edizione eliminata!</div>');
     }
 
 }

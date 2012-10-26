@@ -14,7 +14,8 @@
       <li class="span4">
         <h5>{{ $winner->series_name }} capitolo {{ $winner->chapter_num }} ({{ $winner->name }})</h5><br />
         <a href="{{ URL::home() }}read/{{ $winner->slug }}/{{ $winner->chapter_num }}" class="btn btn-block">Leggi il capitolo</a>
-        <a href="#" class="btn btn-block">Scarica il capitolo</a>
+        <a href="{{ URL::home() }}uploads/{{ $winner->slug }}/{{ $winner->series_name }}_Capitolo_{{ $winner->chapter_num }}.zip"
+          class="btn btn-block">Scarica il capitolo</a>
       </li>
       @endforeach
     </ul>
@@ -47,7 +48,11 @@
               <td>Capitolo {{ $chapter->chapter_num }}</td>
               <td>{{ $chapter->title }}</td>
               <td><a href="{{ URL::home() }}read/{{ $chapter->series->slug }}/{{ $chapter->chapter_num }}">Leggi online</a></td>
-              <td><a href="#">Scarica</a></td>
+              <td>
+                <a href="{{ URL::home() }}uploads/{{ $chapter->series->slug }}/{{ $chapter->series->series_name }}_Capitolo_{{ $chapter->chapter_num }}.zip">
+                  Scarica
+                </a>
+              </td>
             </tr>
             @endforeach
           </tbody>
