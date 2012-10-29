@@ -14,7 +14,6 @@ class Init {
 			$table->increments('id');
 			$table->string('username');
 			$table->string('password');
-			$table->timestamps();
 		});
 
 		Schema::create('editions', function($table)
@@ -55,12 +54,9 @@ class Init {
 			$table->timestamps();
 		});
 
-
 		DB::table('users')->insert(array(
 			'username' => 'admin',
 			'password' => Hash::make('secret'),
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
 		));
 
 		DB::table('editions')->insert(array(

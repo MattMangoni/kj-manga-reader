@@ -11,6 +11,13 @@ class Chapter extends Eloquent
 		'file' 	   => 'required|max:15000',
 	);
 
+	public static $rules_update = array(
+		'serie'    => 'not_in:0',
+		'edizione' => 'not_in:0',
+		'titolo'   => 'required',
+		'numero'   => 'required|integer',
+	);
+
 	public static $messages = array(
 		'serie_not_in' 	  => 'Scegli <strong>una serie</strong>!',
 		'edizione_not_in' => "Scegli <strong>un'edizione</strong>!",
@@ -35,6 +42,21 @@ class Chapter extends Eloquent
 	public static function validate_chapter( $data )
 	{
 		return Validator::make($data, self::$rules, self::$messages);
+	}
+
+	public static function validate_chapter_update( $data )
+	{
+		return Validator::make($data, self::$rules_update, self::$messages);
+	}
+
+	/**
+	 * Get a single chapter from ID
+	 * @param int $id
+	 * @return object
+	 */
+	public static function get_chapter_from_id( $id )
+	{
+		return self::where('id', '=', $id)->first();
 	}
 
 	/**
@@ -83,7 +105,7 @@ class Chapter extends Eloquent
 	 */
 	public static function get_chapter_with_edition($id)
 	{
-		$query = self::with('edition')->where('id', '=', $id)->first();
+		$query = self::with('edition')->where('chapter_num', '=', $id)->first();
 
 		if ($query != null)
 		{

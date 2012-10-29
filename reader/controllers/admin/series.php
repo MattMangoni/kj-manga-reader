@@ -2,6 +2,11 @@
 
 class Admin_Series_Controller extends Base_Controller {
 
+    public function __construct()
+    {
+        $this->filter('before', 'csrf')->on('post');
+    }
+
 	public function action_index()
     {
         $series = Series::get_series();
@@ -80,7 +85,7 @@ class Admin_Series_Controller extends Base_Controller {
 
         if( is_dir($path) )
         {
-            rmdir($path);
+            File::rmdir($path);
             Series::find($id)->delete();
             return Redirect::back()->with('status', '<div class="alert alert-success">Serie cancellata!</div>');
         }
