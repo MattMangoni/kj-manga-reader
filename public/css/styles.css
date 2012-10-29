@@ -14,11 +14,42 @@
 
 /* Styles ovverride */
 
+body#default {
+    background-image: url('../img/bg.png');
+    background-repeat: no-repeat;
+}
+
+#header {
+    height: 180px;
+}
+
+#header-right {
+    margin-top: 9px;
+}
+
+#item p {
+    width: 860px;
+    height: 120px;
+}
+
 .navbar .brand {
 	text-transform: uppercase;
 	font-family: 'BebasNeueRegular', Helvetica, Arial, sans-serif;
 	font-size: 22px;
+    font-weight: normal;
 	padding-bottom: 0;
 	padding-top: 13px;
 	padding-right: 20px;
+}
+
+.thumbnails img {
+    outline: 1px solid gray;
+}
+
+#footer img {
+    opacity: .6;
+}
+
+#footer img:hover {
+    opacity: 1;
 }

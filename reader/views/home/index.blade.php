@@ -2,7 +2,7 @@
 
 @section('sidebar')
 
-<div class="container">
+<div id="main" class="container">
 	<div class="row">
 
  <div class="span4">
@@ -13,13 +13,14 @@
       @foreach($winners as $winner)
       <li class="span4">
         <h5>{{ $winner->series_name }} capitolo {{ $winner->chapter_num }} ({{ $winner->name }})</h5><br />
+        <img src="http://placehold.it/380x250&amp;text=IMMAGINE+VINCITORE"><br /><br />
         <a href="{{ URL::home() }}read/{{ $winner->slug }}/{{ $winner->chapter_num }}" class="btn btn-block">Leggi il capitolo</a>
         <a href="{{ URL::home() }}uploads/{{ $winner->slug }}/{{ $winner->series_name }}_Capitolo_{{ $winner->chapter_num }}.zip"
           class="btn btn-block">Scarica il capitolo</a>
       </li>
       @endforeach
     </ul>
-    <div class="alert alert-important">Per vedere tutti i vincitori, <a href="{{ URL::home() }}vincitori/">clicca qui</a></div>
+    <div class="alert alert-error">Per vedere tutti i vincitori, <a href="{{ URL::home() }}vincitori/">clicca qui</a></div>
   </div>
 @endsection
 
@@ -35,7 +36,7 @@
         	@endif
         </h1>
 
-        <table class="table table-striped">
+        <table class="table">
           <thead>
             <th>Serie</th>
             <th>Capitolo</th>
@@ -121,7 +122,7 @@
 
         </div>
 
-        <div class="alert alert-important">Per vedere i dettagli di tutte le edizioni del Komixjam Manga Project,
+        <div class="alert alert-error">Per vedere i dettagli di tutte le edizioni del Komixjam Manga Project,
           <a href="{{ URL::home() }}edizioni">clicca qui</a></div>
       </div>
 

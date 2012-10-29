@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="utf-8">
     <title>Komixjam Manga Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Manga Reader ufficiale del Komixjam Manga Project">
+    <meta name="author" content="Matteo AoiKage Mangoni">
 
     <!-- Le styles -->
     {{ HTML::style('css/bootstrap.min.css') }}
-
-    <style>
-      body {
-        padding-top: 60px;  /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
 
     {{ HTML::style('css/styles.css') }}
 
@@ -24,21 +18,24 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body id="default">
 
   	@include('home.partials.navigation')
+    @include('home.partials.header')
 
     @yield('sidebar')
     @yield('main')
 
     <br />
 
-    <div class="container">
+    <div id="footer" class="container">
       <div class="row" style="text-align: center;">
-        <div class="span12 nav-header"><h6>Copyright &copy; 2012 Komixjam.it</h6>
-          <br /><br />
+        <div class="nav-header">Copyright &copy; 2012 Komixjam.it</div>
+          <img src="{{ URL::home() }}img/icon-html5.png" alt="Icon HTML5">
+          <img src="{{ URL::home() }}img/icon-css3.png" alt="Icon CSS3">
         </div>
       </div>
+      <br /><br />
     </div>
 
     <!-- Le javascript
@@ -53,6 +50,7 @@
       $("#tipsnav2").tooltip({ placement: 'bottom' });
       $("#tipsnav3").tooltip({ placement: 'bottom' });
       $("#tipsnav4").tooltip({ placement: 'bottom' });
+      $('.carousel').carousel()
     </script>
 
   </body>

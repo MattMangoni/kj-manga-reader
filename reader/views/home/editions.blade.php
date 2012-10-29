@@ -31,7 +31,7 @@
 			</div>
 
 			<div class="span9">
-				<table class="table table-striped">
+				<table class="table">
 					<thead>
 						<th>Serie</th>
 						<th>Capitolo</th>

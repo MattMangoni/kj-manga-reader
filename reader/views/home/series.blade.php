@@ -3,6 +3,14 @@
 @section('main')
 
 <div class="container">
+		<div class="row">
+	        <div class="span12">
+	    		<div class="page-header">
+            		<h1>Elenco Serie <small>Elenco di tutte le serie che partecipano o hanno partecipato al Manga Project</small></h1>
+          		</div>
+          	</div>
+    	</div>
+
 	<div class="row">
 		<div class="span3">
 			<ul>
