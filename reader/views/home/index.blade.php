@@ -20,7 +20,7 @@
       </li>
       @endforeach
     </ul>
-    <div class="alert alert-error">Per vedere tutti i vincitori, <a href="{{ URL::home() }}vincitori/">clicca qui</a></div>
+    <div class="alert">Per vedere tutti i vincitori, <a href="{{ URL::home() }}vincitori/">clicca qui</a></div>
   </div>
 @endsection
 
@@ -122,7 +122,7 @@
 
         </div>
 
-        <div class="alert alert-error">Per vedere i dettagli di tutte le edizioni del Komixjam Manga Project,
+        <div class="alert">Per vedere i dettagli di tutte le edizioni del Komixjam Manga Project,
           <a href="{{ URL::home() }}edizioni">clicca qui</a></div>
       </div>
 
