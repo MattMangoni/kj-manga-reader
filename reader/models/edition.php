@@ -53,6 +53,11 @@ class Edition extends Eloquent
 	 */
 	public static function get_editions()
 	{
+		return self::with('chapters')->where('draft', '=', 'no')->order_by('id', 'desc')->get();
+	}
+
+	public static function get_all_editions()
+	{
 		return self::with('chapters')->order_by('id', 'desc')->get();
 	}
 
@@ -62,7 +67,7 @@ class Edition extends Eloquent
 	 */
 	public static function get_last_edition()
 	{
-		return self::order_by('id', 'desc')->first();
+		return self::where('draft', '=', 'no')->order_by('id', 'desc')->first();
 	}
 
 	/**
@@ -71,7 +76,7 @@ class Edition extends Eloquent
 	 */
 	public static function get_last_edition_id()
 	{
-		return self::order_by('id', 'desc')->first('editions.id')->id;
+		return self::where('draft', '=', 'no')->order_by('id', 'desc')->first('editions.id')->id;
 	}
 
 	/**

@@ -13,7 +13,7 @@ class Admin_Editions_Controller extends Base_Controller {
      */
 	public function action_index()
 	{
-        $editions = Edition::get_editions(); // recupera tutte le edizioni
+        $editions = Edition::get_all_editions(); // recupera tutte le edizioni
         return View::make('admin.editions.editions_table')->with('editions', $editions);
     }
 
@@ -43,6 +43,34 @@ class Admin_Editions_Controller extends Base_Controller {
         }
 
         return Redirect::to('admin/editions/new')->with_errors($validate); // rimanda l'utente al forum se i dati non erano validi
+    }
+
+    public function action_activate( $id )
+    {
+        if (Edition::find($id)->first()->draft == 'yes')
+        {
+            $edition = Edition::find($id);
+            $edition->draft = 'no';
+            $edition->save();
+
+            return Redirect::back()->with('status', '<div class="alert alert-success">Edizione attivata correttamente!</div>');
+        }
+
+        return Redirect::back()->with('status', '<div class="alert alert-error">Edizione disattivata correttamente!</div>');
+    }
+
+    public function action_deactivate( $id )
+    {
+        if (Edition::find($id)->first()->draft == 'no')
+        {
+            $edition = Edition::find($id);
+            $edition->draft = 'yes';
+            $edition->save();
+
+            return Redirect::back()->with('status', '<div class="alert alert-success">Edizione disattivata correttamente!</div>');
+        }
+
+        return Redirect::back()->with('status', '<div class="alert alert-error">L\'edizione è già disattivata!</div>');
     }
 
     /**

@@ -10,8 +10,17 @@ class Admin_Controller extends Base_Controller {
 
 	public function get_index()
     {
-    	$last_edition 			= Edition::get_last_edition();
-    	$last_edition_chapters  = Chapter::get_last_edition_chapters_num($last_edition->id);
+    	$last_edition = Edition::get_last_edition();
+
+        if (isset($last_edition->id))
+        {
+            $last_edition_chapters = Chapter::get_last_edition_chapters_num($last_edition->id);
+        }
+        else
+        {
+            $last_edition_chapters = null;
+        }
+
     	$series_num	  			= Series::count();
     	$chapter_num  			= Chapter::count();
 

@@ -45,37 +45,7 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li><a href="{{ URL::home() }}admin/">Dashboard</a></li>
-              <li class="dropdown" id="edizioni">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#edizioni">
-                  Edizioni
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Aggiungi Edizione</a></li>
-                  <li><a href="#">Gestione Edizioni</a></li>
-                </ul>
-             </li>
-            <li class="dropdown" id="serie">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#serie">
-                Serie
-                <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Aggiungi Serie</a></li>
-                <li><a href="#">Gestione Serie</a></li>
-              </ul>
-             </li>
-            <li class="dropdown" id="capitoli">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#capitoli">
-                Capitoli
-                <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Aggiungi Capitolo</a></li>
-                <li><a href="#">Gestione Capitoli</a></li>
-              </ul>
-             </li>
-
+              <li>{{ HTML::link('logout', 'Logout') }}</li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

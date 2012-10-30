@@ -12,25 +12,33 @@
     	</div>
     	<div class="row">
 			<div class="span3">
+
 				<ul>
-					@foreach($editions as $edition)
-						<li>
-						@if($edition->id == $current)
-							{{ $edition->name }}
-							@if($edition->status == 'Aperto')
-								<span class="label label-success">Aperta</span>
+					@if($editions)
+						@foreach($editions as $edition)
+							<li>
+							@if($edition->id == $current)
+								{{ $edition->name }}
+								@if($edition->status == 'Aperto')
+									<span class="label label-success">Aperta</span>
+								@else
+									<span class="label label-important">Chiusa</span>
+								@endif
 							@else
-								<span class="label label-important">Chiusa</span>
+								<a href="{{ URL::home() }}edizioni/{{ $edition->id }}">{{ $edition->name }}</a>
 							@endif
-						@else
-							<a href="{{ URL::home() }}edizioni/{{ $edition->id }}">{{ $edition->name }}</a>
-						@endif
-						</li>
-					@endforeach
+							</li>
+						@endforeach
+					@else
+						<li>Nessuna serie presente</li>
+					@endif
 				</ul>
 			</div>
 
 			<div class="span9">
+
+			@if($chapters)
+
 				<table class="table">
 					<thead>
 						<th>Serie</th>
@@ -43,8 +51,12 @@
 							<td>{{ $chapter->series->series_name }}</td>
 							<td>Capitolo {{ $chapter->chapter_num }}</td>
 							<td>{{ $chapter->title }}</td>
-							<td><a href="#">Leggi online</a></td>
-							<td><a href="#">Scarica</a></td>
+				              <td class="span1"><a class="btn btn-small" href="{{ URL::home() }}read/{{ $chapter->series->slug }}/{{ $chapter->chapter_num }}">Leggi</a></td>
+				              <td class="span1">
+				                <a class="btn btn-small" href="{{ URL::home() }}uploads/{{ $chapter->series->slug }}/{{ $chapter->series->series_name }}_Capitolo_{{ $chapter->chapter_num }}.zip">
+				                  Scarica
+				                </a>
+				              </td>
 						</tr>
 						@endforeach
 					</tbody>
@@ -56,29 +68,33 @@
 				@if(! $comments->results)
 					<p>Non ci sono commenti per questa edizione</p>
 				@else
-	        <div id="comments-container">
+	        		<div id="comments-container">
 
-	            <div id="comments">
+	            		<div id="comments">
 
-	              @foreach($comments->results as $comment)
-	                <div id="comment">
-	                  <?php
-	                    $date = date('d/m/Y', strtotime($comment->created_at));
-	                    $time = date('H:i', strtotime($comment->created_at));
-	                  ?>
-	                  <p>
-	                    Pubblicato da <strong>{{ $comment->name }}</strong>
-	                    il <strong>{{ $date }}</strong> alle <strong>{{ $time }}</strong>
-	                  </p>
-	                  <p>{{ $comment->comment }}</p><br />
-	                </div>
-	              @endforeach
+			              @foreach($comments->results as $comment)
+			                <div id="comment">
+			                  <?php
+			                    $date = date('d/m/Y', strtotime($comment->created_at));
+			                    $time = date('H:i', strtotime($comment->created_at));
+			                  ?>
+			                  <p>
+			                    Pubblicato da <strong>{{ $comment->name }}</strong>
+			                    il <strong>{{ $date }}</strong> alle <strong>{{ $time }}</strong>
+			                  </p>
+			                  <p>{{ $comment->comment }}</p><br />
+			                </div>
+			              @endforeach
 
-	            </div>
+	            		</div>
 
-	           {{ $comments->links() }}
-	        </div>
+	          			 {{ $comments->links() }}
+
+	        		</div>
 				@endif
+			@else
+				<h3>Nessuna edizione presente nel database</h3>
+			@endif
 		</div>
 	</div>
 </div>

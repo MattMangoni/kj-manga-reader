@@ -19,7 +19,7 @@ class Admin_Chapters_Controller extends Base_Controller {
         $edition_array[0] = "Scegli un'edizione";
 
         $all_series   = Series::get_series();
-        $all_editions = Edition::get_editions();
+        $all_editions = Edition::get_all_editions();
 
         foreach($all_series as $series)
         {

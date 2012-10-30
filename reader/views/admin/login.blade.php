@@ -27,9 +27,9 @@
 			{{ Form::label('username', 'Username') }}
 			{{ Form::text('username', null, array('class' => 'span4', 'placeholder' => 'Username...')); }}
 			{{ Form::label('password', 'Password') }}
-			{{ Form::password('password', array('class' => 'span4', 'placeholder' => 'Password...')); }}
+			{{ Form::password('password', array('class' => 'span4', 'placeholder' => 'Password...')); }}<br /><br />
 
-			{{ Form::submit('Sign in') }}
+			{{ Form::submit('Effettua il login', array('class' => 'btn btn-large btn-info')) }}
 
 			{{ Form::close() }}
 		</div>

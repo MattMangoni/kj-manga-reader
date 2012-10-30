@@ -7,7 +7,7 @@ class Home_Controller extends Base_Controller {
 
     public function __construct()
     {
-        self::$last_edition_id = Edition::get_last_edition()->id;
+        self::$last_edition_id = Edition::get_last_edition() ? Edition::get_last_edition()->id : null;
     }
 
 	/**
@@ -59,11 +59,18 @@ class Home_Controller extends Base_Controller {
 	public function get_editions( $edition = NULL )
     {
         $active_page      = 'editions';
-        $last_edition_id  = Edition::get_last_edition_id();
 
-        if (! is_numeric($edition) or $edition == NULL)
+        if (isset(self::$last_edition_id))
         {
-            return Redirect::to('edizioni/'.$last_edition_id);
+            $last_edition_id  = Edition::get_last_edition_id();
+            if (! is_numeric($edition) or $edition == NULL)
+            {
+                return Redirect::to('edizioni/'.$last_edition_id);
+            }
+        }
+        else
+        {
+            $last_edition_id = null;
         }
 
         $get_editions = Edition::get_editions(); // get all editions
@@ -85,17 +92,18 @@ class Home_Controller extends Base_Controller {
     public function get_series( $id = NULL )
     {
         $active_page    = 'series';
-        $last_series_id = Series::get_last_series_id();
-
-        if (! is_numeric($id))
-        {
-            return Redirect::to('serie/'.$last_series_id);
-        }
+        $last_series_id = is_numeric($id) ? Series::get_last_series_id()->id : null;
 
         $get_series   = Series::get_series(); // get all series
-        $get_chapters = Chapter::get_chapters('series', $id); // get all chapters from a series
+        $get_chapters = null;
+
+        if ($last_series_id != null)
+        {
+            $get_chapters = Chapter::get_chapters('series', $id); // get all chapters from a series
+        }
 
         return View::make('home.series')
+            ->with('current_series', $last_series_id)
             ->with('active',   $active_page)
             ->with('current',  $id)
             ->with('series',   $get_series)

@@ -46,7 +46,7 @@ class Series extends Eloquent
 	 */
 	public static function get_last_series_id()
 	{
-		return self::order_by('id', 'desc')->first('series.id')->id;
+		return self::order_by('id', 'desc')->first('series.id');
 	}
 
 	/**

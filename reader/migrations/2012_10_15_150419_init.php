@@ -23,6 +23,7 @@ class Init {
 			$table->string('status');
 			$table->string('winner_chapter_id')->default('');
 			$table->string('winner_series_id')->default('');
+			$table->string('draft')->default('yes');
 			$table->timestamps();
 		});
 
@@ -33,6 +34,8 @@ class Init {
 			$table->integer('series_id');
 			$table->string('title');
 			$table->integer('chapter_num');
+			$table->string('thumbnail')->default('');
+			$table->string('cover')->default('');
 			$table->timestamps();
 		});
 
@@ -58,93 +61,6 @@ class Init {
 			'username' => 'admin',
 			'password' => Hash::make('secret'),
 		));
-
-		DB::table('editions')->insert(array(
-			'name'      		=> 'Luglio 2012',
-			'status'    		=> 'Chiuso',
-			'winner_chapter_id' => 1,
-			'winner_series_id'	=> 1,
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
-		DB::table('editions')->insert(array(
-			'name'   			=> 'Ottobre 2012',
-			'status' 			=> 'Aperto',
-			'winner_chapter_id' => '',
-			'winner_series_id'	=> '',
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
-		DB::table('series')->insert(array(
-			'series_name' => 'Up!',
-			'author'      => 'Lonewolf',
-			'slug'		  => 'up',
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
-		DB::table('chapters')->insert(array(
-			'edition_id'  => 1,
-			'series_id'   => 1,
-			'title'		  => 'Prologo',
-			'chapter_num' => 1,
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
-		DB::table('chapters')->insert(array(
-			'edition_id'  => 2,
-			'series_id'   => 1,
-			'title'		  => 'Il mostro verde',
-			'chapter_num' => 2,
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
-		DB::table('chapters')->insert(array(
-			'edition_id'  => 2,
-			'series_id'   => 1,
-			'title'		  => 'Il mostro blu',
-			'chapter_num' => 3,
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
-		DB::table('chapters')->insert(array(
-			'edition_id'  => 2,
-			'series_id'   => 1,
-			'title'		  => 'La patata fritta',
-			'chapter_num' => 4,
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
-		DB::table('comments')->insert(array(
-			'edition_id' => 2,
-			'name'		 => 'Giggi',
-			'comment'	 => 'Ottimo capitolo!',
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
-		DB::table('comments')->insert(array(
-			'edition_id' => 2,
-			'name'		 => 'Francesco',
-			'comment'	 => 'Non mi è piaciuto molto...',
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
-		DB::table('comments')->insert(array(
-			'edition_id' => 2,
-			'name'		 => 'Giggi',
-			'comment'	 => 'Ottimo capitolo!',
-			'created_at' => date('Y-m-d H:i'),
-			'updated_at' => date('Y-m-d H:i')
-		));
-
 	}
 
 	/**
