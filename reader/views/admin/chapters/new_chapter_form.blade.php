@@ -30,8 +30,14 @@
 	{{ Form::label('numero', 'Numero capitolo') }}
 	{{ Form::text('numero', '', array('class' => 'span1')) }}<br /><br />
 
-	{{ Form::label('file', 'Carica il file zip') }}
-	{{ Form::file('file') }}
+	{{ Form::label('file', 'FILE ZIP DEL CAPITOLO') }}
+	{{ Form::file('file') }}<br /><br />
+
+	{{ Form::label('cover', 'Immagine grande (960px*120px)') }}
+	{{ Form::file('cover') }}<br /><br />
+
+	{{ Form::label('thumbnail', 'Immagine piccola (380px*250px)') }}
+	{{ Form::file('thumbnail') }}
 	<br /><br />
 
 	{{ Form::submit("Inserisci il capitolo", array('class' => 'btn btn-success btn-large')) }}

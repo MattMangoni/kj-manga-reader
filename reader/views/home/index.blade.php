@@ -15,7 +15,9 @@
       @foreach($winners as $winner)
       <li class="span4">
         <h5>{{ $winner->series_name }} capitolo {{ $winner->chapter_num }} ({{ $winner->name }})</h5><br />
-        <img src="http://placehold.it/380x250&amp;text=IMMAGINE+VINCITORE"><br /><br />
+        @if($winner->thumbnail != '')
+          <img src="{{ URL::home() }}uploads/{{ $winner->slug }}/images/{{ $winner->thumbnail }}"><br /><br />
+        @endif
         <a href="{{ URL::home() }}read/{{ $winner->slug }}/{{ $winner->chapter_num }}" class="btn btn-block">Leggi il capitolo</a>
         <a href="{{ URL::home() }}uploads/{{ $winner->slug }}/{{ $winner->series_name }}_Capitolo_{{ $winner->chapter_num }}.zip"
           class="btn btn-block">Scarica il capitolo</a>

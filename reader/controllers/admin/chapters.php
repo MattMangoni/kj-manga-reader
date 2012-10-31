@@ -56,14 +56,19 @@ class Admin_Chapters_Controller extends Base_Controller {
             $full_name     = $upload_path . DS . $series->series_name . '_Capitolo_' . $chapter_num . '.zip'; // nome del file zip
             $unzipped_path = $upload_path . DS . $chapter_num; // path in cui scompattare lo zip
 
+            $thumbnail = $data['thumbnail']['name'];
+            $cover     = $data['cover']['name'];
+
             // carico il file sul server
             Input::upload('file', $upload_path, $series->series_name . '_Capitolo_' . $chapter_num . '.zip');
+            Input::upload('cover', $upload_path.DS.'images', $cover);
+            Input::upload('thumbnail', $upload_path.DS.'images', $thumbnail);
 
             // scompatto il file nella cartella del capitolo
             Reader::unzip($full_name, $unzipped_path);
 
             // inserisco i dati nel DB
-            Chapter::insert_chapter($edition_id, $series_id, $chapter_num, $title);
+            Chapter::insert_chapter($edition_id, $series_id, $chapter_num, $cover, $thumbnail, $title);
 
             return Redirect::back()->with('status', '<div class="alert alert-success">Capitolo inserito correttamente!</div>');
         }

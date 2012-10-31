@@ -4,11 +4,13 @@ class Chapter extends Eloquent
 {
 
 	public static $rules = array(
-		'serie'    => 'not_in:0',
-		'edizione' => 'not_in:0',
-		'titolo'   => 'required',
-		'numero'   => 'required|integer',
-		'file' 	   => 'required|max:15000',
+		'serie'     => 'not_in:0',
+		'edizione'  => 'not_in:0',
+		'titolo'    => 'required',
+		'numero'    => 'required|integer',
+		'file' 	    => 'required|max:15000',
+		'cover'     => 'required|max:2048',
+		'thumbnail' => 'required|max:2048',
 	);
 
 	public static $rules_update = array(
@@ -19,14 +21,20 @@ class Chapter extends Eloquent
 	);
 
 	public static $messages = array(
-		'serie_not_in' 	  => 'Scegli <strong>una serie</strong>!',
-		'edizione_not_in' => "Scegli <strong>un'edizione</strong>!",
-		'titolo_required' => 'Il <strong>titolo</strong> è obbligatorio',
-		'numero_required' => 'Il <strong>numero del capitolo</strong> è obbligatorio',
-		'numero_integer'  => 'Il <strong>numero del capitolo</strong> deve essere un numero',
-		'file_required'	  => 'Devi caricare <strong>il file del capitolo</strong>!',
-		'file_mimes'	  => 'Il <strong>file</strong> deve essere uno <strong>zip</strong>',
-		'file_max'		  => 'Il <strong>file</strong> deve essere <strong>più piccolo di 10mb</strong>!',
+		'serie_not_in' 	 	 => 'Scegli <strong>una serie</strong>!',
+		'edizione_not_in'	 => "Scegli <strong>un'edizione</strong>!",
+		'titolo_required'	 => 'Il <strong>titolo</strong> è obbligatorio',
+		'numero_required'	 => 'Il <strong>numero del capitolo</strong> è obbligatorio',
+		'numero_integer'  	 => 'Il <strong>numero del capitolo</strong> deve essere un numero',
+		'file_required'	  	 => 'Devi caricare <strong>il file del capitolo</strong>!',
+		'file_mimes'	  	 => 'Il <strong>file</strong> deve essere uno <strong>zip</strong>',
+		'file_max'		  	 => 'Il <strong>file</strong> deve essere <strong>più piccolo di 10mb</strong>!',
+		'cover_required'  	 => 'Devi caricare <strong>la cover del capitolo</strong>!',
+		'cover_mimes'	  	 => 'La <strong>cover</strong> deve essere un\'immagine',
+		'cover_max'		  	 => 'La <strong>cover</strong> deve essere <strong>più piccola di 2mb</strong>!',
+		'thumbnail_required' => 'Devi caricare <strong>il thumbnail del capitolo</strong>!',
+		'thumbnail_mimes'	 => 'Il <strong>thumbnail</strong> deve essere un\'immagine',
+		'thumbnail_max'		 => 'Il <strong>thumbnail</strong> deve essere <strong>più piccolo di 2mb</strong>!',
 	);
 
 	public function edition()
@@ -138,8 +146,15 @@ class Chapter extends Eloquent
 		return self::where('edition_id', '=', $id)->count();
 	}
 
-	public static function insert_chapter($edition_id, $series_id, $chapter_num, $title)
+	public static function insert_chapter($edition_id, $series_id, $chapter_num, $cover, $thumbnail, $title)
 	{
-		return self::create( array( 'edition_id' => $edition_id, 'series_id' => $series_id, 'chapter_num' => $chapter_num, 'title' => $title ) );
+		return self::create(array(
+			'edition_id' 	=> $edition_id,
+			'series_id' 	=> $series_id,
+			'chapter_num'   => $chapter_num,
+			'title' 		=> $title,
+			'cover' 		=> $cover,
+			'thumbnail' 	=> $thumbnail
+		));
 	}
 }
